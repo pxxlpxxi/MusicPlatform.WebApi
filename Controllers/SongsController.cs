@@ -14,10 +14,10 @@ public class SongsController : ControllerBase
     private readonly SongApplicationService _songApplicationService;
 
     public SongsController(
-        SongCreationApplicationService songCreationApplicationService,
+        //SongCreationApplicationService songCreationApplicationService,
         SongApplicationService songApplicationService)
     {
-        _songCreationApplicationService = songCreationApplicationService;
+        //_songCreationApplicationService = songCreationApplicationService;
         _songApplicationService = songApplicationService;
     }
 
@@ -72,7 +72,7 @@ public class SongsController : ControllerBase
                 SongRequestMapper.ToApplicationModel(request);
 
             SongInfo createdSong =
-                _songCreationApplicationService.CreateSong(songInfo);
+                _songApplicationService.CreateSong(songInfo);
 
             return CreatedAtAction(
                 nameof(GetSong),
@@ -100,13 +100,23 @@ public class SongsController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public ActionResult UpdateSongTitle(int id, [FromBody] string newTitle)
+    public ActionResult UpdateSong(
+        int id,
+        [FromBody] SongRequest request)
     {
         try
         {
-            _songApplicationService.UpdateSongTitle(id, newTitle);
+            SongInfo songInfo =
+                SongRequestMapper.ToApplicationModel(request);
 
-            return Ok();
+            SongInfo updatedSong =
+                _songApplicationService.UpdateSong(
+                    id,
+                    songInfo);
+
+            return Ok(
+                SongResponseMapper.ToResponse(
+                    updatedSong));
         }
         catch (ArgumentException ex)
         {
@@ -117,6 +127,4 @@ public class SongsController : ControllerBase
             return NotFound();
         }
     }
-
 }
-

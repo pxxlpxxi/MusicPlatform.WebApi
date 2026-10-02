@@ -52,5 +52,68 @@ GET http://localhost:5193/api/songs/47
 ### Delete song
 DELETE http://localhost:5193/api/songs/47
 
+### Get all artists
+GET http://localhost:5193/api/tables/Artist
+Accept: application/json
+
+###
+
+### Create artist
+POST http://localhost:5193/api/tables/Artist/rows
+Content-Type: application/json
+
+{
+  "values": {
+    "Name": "API Test Artist"
+  }
+}
+
+###
+
+### Update artist
+PUT http://localhost:5193/api/tables/Artist/rows/25
+Content-Type: application/json
+
+{
+  "values": {
+    "Name": "Updated API Test Artist"
+  }
+}
+
+###
+
+### Delete artist
+DELETE http://localhost:5193/api/tables/Artist/rows/25
+
+###
+
+### Get all artists after CRUD test
+GET http://localhost:5193/api/tables/Artist
+Accept: application/json
 
 
+### create artist
+POST http://localhost:5193/api/tables/Artist/rows
+Content-Type: application/json
+
+{
+  "values": {
+    "name": "Test Artist"
+  }
+}
+
+### update artist
+PUT http://localhost:5193/api/tables/Artist/rows/26
+Content-Type: application/json
+
+{
+  "values": {
+    "name": "Updated API Test Artist"
+  }
+}
+
+### delete artist
+DELETE http://localhost:5193/api/tables/Artist/rows/26
+
+###
+GET http://localhost:5193/api/songs/search?term=teddy
