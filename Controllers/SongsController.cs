@@ -10,14 +10,11 @@ namespace MusicPlatform.WebApi.Controllers;
 [Route("api/[controller]")]
 public class SongsController : ControllerBase
 {
-    private readonly SongCreationApplicationService _songCreationApplicationService;
     private readonly SongApplicationService _songApplicationService;
 
     public SongsController(
-        //SongCreationApplicationService songCreationApplicationService,
         SongApplicationService songApplicationService)
     {
-        //_songCreationApplicationService = songCreationApplicationService;
         _songApplicationService = songApplicationService;
     }
 

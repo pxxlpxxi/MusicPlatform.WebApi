@@ -24,7 +24,6 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddScoped<IMusicPlatformContext, MusicPlatformContext>();
 
-//builder.Services.AddScoped<SongCreationApplicationService>();
 builder.Services.AddScoped<SongService>();
 builder.Services.AddScoped<SongApplicationService>();
 
