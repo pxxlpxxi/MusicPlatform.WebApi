@@ -117,3 +117,6 @@ DELETE http://localhost:5193/api/tables/Artist/rows/26
 
 ###
 GET http://localhost:5193/api/songs/search?term=teddy
+
+### get db status
+GET https://localhost:7118/api/tables/status

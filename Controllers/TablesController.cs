@@ -22,6 +22,14 @@ public class TablesController : ControllerBase
         return Ok(_databaseTableService.GetTableNames());
     }
 
+    [HttpGet("status")]
+    public ActionResult GetDatabaseStatus()
+    {
+        return Ok(
+            _databaseTableService.GetDatabaseStatus());
+    }
+
+
     [HttpGet("{name}")]
     public ActionResult GetTable(string name)
     {

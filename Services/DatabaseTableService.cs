@@ -41,6 +41,39 @@ public class DatabaseTableService
         return tables;
     }
 
+    public DatabaseStatus GetDatabaseStatus()
+    {
+        var tableNames = GetTableNames();
+
+        var status = new DatabaseStatus
+        {
+            TableCount = tableNames.Count
+        };
+
+        using var connection = new NpgsqlConnection(_connectionString);
+        connection.Open();
+
+        foreach (var tableName in tableNames)
+        {
+            using var command = new NpgsqlCommand(
+                $"SELECT COUNT(*) FROM \"{tableName}\";",
+                connection);
+
+            long rowCount =
+                Convert.ToInt64(command.ExecuteScalar());
+
+            status.Tables.Add(
+                new TableStatus
+                {
+                    Name = tableName,
+                    RowCount = rowCount
+                });
+        }
+
+        return status;
+    }
+
+
     public TableData? GetTable(string tableName)
     {
         if (!GetTableNames().Contains(tableName))
